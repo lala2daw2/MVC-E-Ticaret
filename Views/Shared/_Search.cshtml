@@ -1,0 +1,9 @@
+﻿
+    @{ 
+        Layout = null;
+    }
+@using (Html.BeginForm("AramaSonucu", "Home", FormMethod.Post, new { @class = "search" }))
+{
+    @Html.TextBox("txtSearch", null, new { @class = "search-line", placeholder = "Ara.." })
+    <button type="submit" class="search-button"></button>
+}

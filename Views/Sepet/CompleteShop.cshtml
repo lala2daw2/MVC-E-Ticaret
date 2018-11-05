@@ -1,0 +1,42 @@
+﻿@model eTrade.App_Start.Sepet
+@{
+    ViewBag.Title = "CompleteShop";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="order-title">Your order</div>
+    <div class="row">
+        <div class="col-md-9">
+         <ul class="checkout-info">
+             <li class="checkout-info-1">Ürün Adı</li>
+             <li class="checkout-info-2">Tutar</li>
+         </ul>
+            <div class="checkout-info-box">
+                <!-- REPEAT PRODUCT -->
+                @foreach (var item in Model.Urunler)
+                {
+                    <ul class="checkout-product">
+
+                        <li class="checkout-product-1">@item.Urun.Adi</li>
+                        <li class="checkout-product-2">@item.Tutar.ToString("C2")</li>
+                    </ul>
+                }
+
+                <ul class="checkout-product last">
+                    <li class="checkout-product-1">Toplam Tutar</li>
+                    <li class="checkout-product-2">@string.Format("{0:C}", Model.ToplamTutar)</li>
+                </ul>
+            </div>
+        </div>
+        @using (Html.BeginForm("CompleteShop", "Sepet", FormMethod.Post))
+        {
+            <div class="col-md-3">
+                @Html.DropDownList("Kargo", null, new { @class = "form-control" })
+                <br />
+                <button type="submit" class="button-6">Alışverişi Tamamla</button>
+            </div>
+        }
+    </div>
+</div>
+

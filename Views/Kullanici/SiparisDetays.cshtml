@@ -1,0 +1,32 @@
+﻿@{ 
+    Layout = null;
+}
+@model IEnumerable<eTrade.Models.SatisDetay>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Adeti</th>
+                <th>Fiyat</th>
+                <th class="" style="right:720px" width="20"><a class="btn btnCik">X</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Urunler.Adi</td>
+                    <td>@item.Adet</td>
+                    <td>@item.Fiyat</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function myfunction() {
+        $('.btnCik').click(function myfunction() {
+            $('.table-bordered').html('');
+        });
+    });
+</script>

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<eTrade.Models.Kategoriler>
+<li class="menu-item-has-children active">
+    <a>Kategoriler</a>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                @Html.ActionLink(item.KategoriAd, "KategoriUrunList", "Home", new { id = item.ID, catName = item.KategoriAd },new {@class="" })
+            </li>
+        }
+    </ul>

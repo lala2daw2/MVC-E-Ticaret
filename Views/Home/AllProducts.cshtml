@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "AllProducts";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<eTrade.Models.Urunler>
+<div class="container">
+    <div class="site-title">
+        <div class="site-inside"><span>Tüm Ürünlerimiz</span></div>
+    </div>
+    <div class="row">
+        <div class="tesla-carousel-items">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 col-xs-6">
+                    <div class="product">
+                        <div class="product-cover">
+                            <div class="product-cover-hover">
+                                <span>
+                                    <a href="/UrunDetay/@item.Adi/@item.ID">Görüntüle</a>
+                                </span>
+                            </div>
+                            <img style="width:200px; height:250px;" src=" @(item.Resimlers!=null?item.Resimlers.FirstOrDefault(x=>x.Varsayilan==true).OrtaYol:"~/HomeLayout/images/photos/image-8.jpg")" alt="@item.Adi." />
+
+                        </div>
+                        <div class="product-details">
+                            <h1>
+                                <a href="/UrunDetay/@item.Adi/@item.ID">@item.Adi</a>
+                            </h1>
+                            <p>@(item.Aciklama.Length > 50 ? Html.Raw(item.Aciklama.Substring(0, 50)) : Html.Raw(item.Aciklama))</p>
+                            <div class="product-price">
+                                <a class="addCart" data-id="@item.ID"><i class="icon-257" title="Sepete ekle"></i></a>
+
+                                @string.Format("{0:C}", item.SatisFiyat)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <center>
+        @Html.PagedListPager(Model, _sayfaNo => Url.Action("AllProducts", "Home", new { SayfaNo = _sayfaNo }))
+
+    </center>
+</div>
+

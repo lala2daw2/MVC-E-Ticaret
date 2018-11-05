@@ -1,0 +1,6 @@
+﻿@model IEnumerable<eTrade.Models.Markalar>
+@foreach (var item in Model)
+{
+    <div style="width:250px " class="col-md-2 col-xs-6"><img style="width:100px"  src="@item.Resimler.KucukYol" alt="@item.MarkaAd" /></div>
+
+}

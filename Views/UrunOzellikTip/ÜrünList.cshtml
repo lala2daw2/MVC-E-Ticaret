@@ -1,0 +1,18 @@
+﻿@model IEnumerable<eTrade.Models.Urunler>
+@{
+    ViewBag.Title = "ÜrünList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+
+    <h3>Ürün Özellik Ekleme</h3>
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                @item.Markalar.MarkaAd @item.Adi<a class="btn-primary btn-sm navbar-right" href="/Urun/OzellikVer/@item.Adi/@item.ID">Özellik ekle</a>
+            </li>
+        }
+    </ul>
+</div>
+

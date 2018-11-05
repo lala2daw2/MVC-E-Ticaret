@@ -1,0 +1,4 @@
+﻿@model IEnumerable<eTrade.Models.OzellikDeger>
+<div>
+    @Html.DropDownList("OzellikDegerID", new SelectList(Model, "ID", "Adi"), null, new { @class = "form-control" })
+</div>

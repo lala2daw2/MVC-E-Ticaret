@@ -1,0 +1,49 @@
+﻿@model IEnumerable<eTrade.Models.Satislar>
+@{
+    ViewBag.Title = "OrderDetailByUsername";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<link href="~/HomeLayout/css/style.css" rel="stylesheet" />
+<link href="~/HomeLayout/css/bootstrap.css" rel="stylesheet" />
+<div class="col-lg-10">
+    <h2>Müşterinin satın almış olduğu ürünler</h2>
+    <div class="well">
+        <div class="shopping-cart">
+            <div class="shopping-cart-products">
+                <ul class="shopping-product-detail">
+                    <li class="shopping-1">Ürün Adı</li>
+                    <li class="shopping-2">Adet</li>
+                    <li class="shopping-3">Tutar</li>
+                    <li class="shopping-4">Tarih</li>
+                    <li class="shopping-5">Toplam Tutar</li>
+
+                </ul>
+                @foreach (var item in Model)
+                {
+                    <ul class="shopping-product-detail">
+                        <li class="shopping-1">
+                            @item.SatisDetays.FirstOrDefault(a=>a.SatisID==item.ID).Urunler.Adi
+                        </li>
+                        <li class="shopping-2">
+                            @item.SatisDetays.FirstOrDefault(a => a.SatisID == item.ID).Adet
+
+                        </li>
+                        <li class="shopping-3">
+                            @string.Format("{0:C}",item.SatisDetays.FirstOrDefault(a => a.SatisID == item.ID).Fiyat)
+
+                        </li>
+                        <li class="shopping-4">
+                            @string.Format("{0:dd MMMMMMM yyyy - H:mm}",item.SatisTarihi)
+                        </li>
+                        <li class="shopping-5">
+                            @string.Format("{0:C}",item.ToplamTutar)
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>

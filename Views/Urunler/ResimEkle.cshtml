@@ -1,0 +1,25 @@
+﻿@model eTrade.Models.Urunler
+@{
+    ViewBag.Title = "ResimEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12">
+    <br />
+    <h3>@Model.Adi</h3><i>adlı ürüne resim ekle.</i><br /><br />
+    <div id="imagePage">
+
+    </div>
+    @using (Html.BeginForm("ResimEkle", "Urunler", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            @Html.TextBox("txtFoto", null, new { @class = "form-control", type = "file" })
+        </div>
+        <button type="submit" class="btn btn-success">Kaydet</button>
+        <div class="alert-warning">
+            @ViewBag.Hata
+        </div>
+    }
+
+</div>
+

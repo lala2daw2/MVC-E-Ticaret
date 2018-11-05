@@ -1,0 +1,105 @@
+﻿@model eTrade.ViewModel.UserVM
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+@{
+    if (Model.Musteriler != null)
+    {
+<div class="col-md-2" style="height:500px;">
+    <center>
+        <ul class="glyphicon-list">
+            <li><img src="@ViewBag.Foto" /></li>
+            <li style="font-size:17px">
+                @Html.ActionLink(Model.Kullanicilar.UserName + " Profili", "Profil", "Kullanici", new { id = User.Identity.Name }, new { @class = "btn-sm btn-success" })
+                <br /><br />
+
+            </li>
+
+            <li style="font-size:15px">
+                @Html.ActionLink("Profil Bilgilerini Güncelle", "Kullanici/Edit",  new { id = User.Identity.Name }, new { @class = "btn-sm btn-primary" })
+                <br /><br />
+            </li>
+            <li style="font-size:15px"><a href="/Siparislerim/@User.Identity.Name" class="button-2" style="color:white">Siparişlerim</a></li>
+            <li style="font-size:15px"><a href="/GecmisSiparis/@User.Identity.Name" class="button-3">Geçmiş Siparişlerim</a></li>
+        </ul>
+    </center>
+</div>
+        <div class="col-sm-1"></div>
+        <div class="col-md-6">
+            @using (Html.BeginForm("Edit", "Kullanici", FormMethod.Post, new { @class = "register-form", enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(x => x.Musteriler.ID)
+                <h3>Profil bilgilerini güncelle.</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Adınız <span class="neccesary">*</span></p>
+                        @Html.TextBoxFor(x => x.Musteriler.Ad, new { @class = "input-line" })
+                    </div>
+                    <div class="col-md-6">
+                        <p>Soyadınız <span class="neccesary">*</span></p>
+                        @Html.TextBoxFor(x => x.Musteriler.Soyad, new { @class = "input-line" })
+                    </div>
+                </div>
+
+                <p>Telefon <span class="neccesary">*</span></p>
+                @Html.TextBoxFor(x => x.Musteriler.Telefon, new { @class = "input-line" })
+
+                <p>Adresiniz <span class="neccesary">*</span></p>
+                @Html.TextArea("txtAdres",null, 7, 3, new { @class = "input-line" })
+                <p>Fotoğraf <span class="neccesary"></span></p>
+                @Html.TextBox("txtFoto", null, new { @class = "input-line", type = "file" })
+                <div class="navbar-right col-md-8">
+                    <button type="submit" class="button-5">Kaydet</button>
+                </div>
+            }
+        </div>
+
+    }
+    if (Model.Musteriler == null)
+    {
+        <div class="col-md-2" style="height:500px;">
+            <center>
+                <ul class="glyphicon-list">
+                    <li style="font-size:17px">
+                        @Html.ActionLink(User.Identity.Name + " Profili", "Profil", "Kullanici", new { id = User.Identity.Name }, new { @class = "btn-sm btn-success" })
+                        <br /><br />
+                    </li>
+                    <li style="font-size:15px">
+                        @Html.ActionLink("Profil Bilgilerini Güncelle", "Edit", "Kullanici", new { id = User.Identity.Name }, new { @class = "btn-sm btn-primary" })
+                        <br /><br />
+                    </li>
+                    <li style="font-size:15px"><a href="/Kullanici/Siparislerim/@User.Identity.Name" class="button-2" style="color:white">Siparişlerim</a></li>
+                    <li style="font-size:15px"><a href="/Kullanici/GecmisSiparis/@User.Identity.Name" class="button-3">Geçmiş Siparişlerim</a></li>
+                </ul>
+            </center>
+        </div>
+        <div class="col-md-6">
+            @using (Html.BeginForm("Edit", "Kullanici", FormMethod.Post, new { @class = "register-form", enctype = "multipart/form-data" }))
+            {
+                <h3>Profil bilgilerini güncelle.</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Adınız <span class="neccesary">*</span></p>
+                        @Html.TextBoxFor(x => x.Musteriler.Ad, new { @class = "input-line" })
+                    </div>
+                    <div class="col-md-6">
+                        <p>Soyadınız <span class="neccesary">*</span></p>
+                        @Html.TextBoxFor(x => x.Musteriler.Soyad, new { @class = "input-line" })
+                    </div>
+                </div>
+
+                <p>Telefon <span class="neccesary">*</span></p>
+                @Html.TextBoxFor(x => x.Musteriler.Telefon, new { @class = "input-line" })
+                <p>Fotoğraf <span class="neccesary"></span></p>
+                @Html.TextBox("txtFoto", null, new { @class = "input-line", type = "file" })
+                <p>Adresiniz <span class="neccesary">*</span></p>
+                @Html.TextAreaFor(x => x.Musteriler.MusteriAdreslers.FirstOrDefault(y => y.MusteriID == Model.Musteriler.ID).Adres, 7, 3, new { @class = "input-line" })
+                <div class="navbar-right col-md-8">
+                    <button type="submit" class="button-5">Kaydet</button>
+                </div>
+            }
+        </div>
+    }
+}

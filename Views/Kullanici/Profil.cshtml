@@ -1,0 +1,34 @@
+﻿@model System.Web.Security.MembershipUser
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="col-md-2" style="height:500px;">
+    <center>
+        <ul class="glyphicon-list">
+            <li><img src="@ViewBag.Foto" /></li>
+            <li style="font-size:17px">
+                @Html.ActionLink(Model.UserName + " Profili", "Profil", "Kullanici", new { id = User.Identity.Name }, new { @class = "btn-sm btn-success" })
+                <br /><br />
+
+            </li>
+
+            <li style="font-size:15px">
+                @Html.ActionLink("Profil Bilgilerini Güncelle", "Edit", "Kullanici", new { id = User.Identity.Name }, new { @class = "btn-sm btn-primary" })
+                <br /><br />
+            </li>
+            <li style="font-size:15px"><a href="/Siparislerim/@User.Identity.Name" class="button-2" style="color:white">Siparişlerim</a></li>
+            <li style="font-size:15px"><a href="/GecmisSiparis/@User.Identity.Name" class="button-3">Geçmiş Siparişlerim</a></li>
+        </ul>
+    </center>
+</div>
+<div class="col-md-9">
+    <ul class="list-group">
+        <li class="list-group-item"><b>Kullanıcı Adı : </b>@Model.UserName</li>
+        <li class="list-group-item"><b>E-Mail Adresi : </b>@Model.Email</li>
+        <li class="list-group-item"><b>Kayıt Tarihi : </b>@string.Format("{0:dd MMMMM yyyy - H:mm}", Model.CreationDate)</li>
+        <li class="list-group-item"><b>Son Giriş Tarihi : </b>@string.Format("{0:dd MMMMM yyyy - H:mm}", Model.LastLoginDate)</li>
+    </ul>
+</div>
+

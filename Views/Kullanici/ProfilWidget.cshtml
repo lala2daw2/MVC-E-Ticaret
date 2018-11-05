@@ -1,0 +1,18 @@
+﻿@model eTrade.Models.Musteri
+<div class="col-md-2" style="height:500px;">
+    <center>
+        <ul class="glyphicon-list">
+           <li><img src="@Model.Resimler.KucukYol" /></li>
+            <li style="font-size:17px">
+                @Html.ActionLink(User.Identity.Name + " Profili", "Profil", "Kullanici", new { id = User.Identity.Name }, new { @class = "btn-sm btn-success" })
+                <br /><br />
+            </li>
+            <li style="font-size:15px">
+                @Html.ActionLink("Profil Bilgilerini Güncelle", "Edit", "Kullanici", new { id = User.Identity.Name }, new { @class = "btn-sm btn-primary" })
+                <br /><br />
+            </li>
+            <li style="font-size:15px"><a href="/Kullanici/Siparislerim/@User.Identity.Name" class="button-2" style="color:white">Siparişlerim</a></li>
+            <li style="font-size:15px"><a href="/Kullanici/GecmisSiparis/@User.Identity.Name" class="button-3">Geçmiş Siparişlerim</a></li>
+        </ul>
+    </center>
+</div>

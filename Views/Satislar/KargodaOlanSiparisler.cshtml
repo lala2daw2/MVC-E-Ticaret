@@ -1,0 +1,32 @@
+﻿@model IEnumerable<eTrade.Models.Satislar>
+@{
+    ViewBag.Title = "BekleyenSiparisler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <h2>Kargoda olan Siparişler</h2>
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Adı Soyadı</th>
+                <th>Kargo Şirketi</th>
+                <th>Satış Tarihi</th>
+                <th>Sipariş Durumu</th>
+                <th>Toplam Ücret</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Musteri.Ad @item.Musteri.Soyad</td>
+                    <td>@item.Kargolar.SirketAdi</td>
+                    <td>@string.Format("{0:dd MMMMMM yyyy - H:mm}", item.SatisTarihi)</td>
+                    <td>@item.SiparisDurum.Ad</td>
+                    <td>@string.Format("{0:C} ", item.ToplamTutar)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

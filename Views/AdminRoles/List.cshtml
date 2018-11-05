@@ -1,0 +1,50 @@
+﻿@model List<string>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <h2>Yetki Listesi</h2>
+    <div class="nav navbar navbar-right">
+        @Html.ActionLink("Yeni Rol", "Create", "AdminRoles", new { @class = "btn btn-primary" })
+    </div>
+    <table class="table table-bordered table-hover table-responsive" id="tblRole">
+        <thead>
+            <tr>
+                <th>Rol Adı</th>
+                <th>Sil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (string item in Model)
+            {
+                <tr>
+                    <td>@item</td>
+                    <td>
+                        <a class="btn btn-danger btnRole" data-id="@item">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function myfunction() {
+        $("#tblRole").on("click", ".btnRole", function myfunction() {
+            var btn = $(this);
+            var id = btn.data("id");
+            $.ajax({
+                url: "/AdminRoles/Delete/" + id,
+                type: "POST",
+                success: function myfunction() {
+                    btn.parent().parent().remove();
+                },
+                error: function myfunction() {
+                    alert("Silme işlemi başarısız");
+                }
+            });
+        });
+    });
+</script>
+

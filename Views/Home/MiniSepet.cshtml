@@ -1,0 +1,63 @@
+﻿@model eTrade.App_Start.Sepet
+@{
+    /**/
+
+    Layout = null;
+}
+@{
+    if (Model != null)
+    {
+        <div class="cart-all">
+            <i class="icon-19" title="19"></i>@Model.ToplamTutar.ToString("C2")
+            <div class="inside-cart">
+                <p>@Model.Urunler.Sum(x => x.Adet) adet ürün var.</p>
+                <ul>
+                    @foreach (var item in Model.Urunler)
+                    {
+                        <li>
+                            <div class="inside-cart-image"><img src="~/HomeLayout/images/photos/image-9.jpg" alt="@item.Urun.Adi"></div>
+                            <button class="btnDusur" data-id="@item.Urun.ID">x</button>
+                            <a href="/Home/ProductDetail/@item.Urun.ID"> @item.Urun.Adi</a>
+                            <p>Fiyatı : @item.Tutar.ToString("C2")</p>
+                            <p>Adet : @item.Adet</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <div class="cart-all">
+            <i class="icon-19" title="19"></i>0 TL
+            <div class="inside-cart">
+                <p>0 adet ürün var.</p>
+
+            </div>
+        </div>
+    }
+}
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function myfunction() {
+        $('.btnDusur').click(function myfunction() {
+            var btn = $(this);
+            var id = btn.data("id");
+            $.ajax({
+                url: "/Sepet/AdetDüsür/" + id,
+                type: "GET",
+                success: function myfunction() {
+                    $.ajax({
+                        url: "/Home/MiniSepet",
+                        type: "GET",
+                        success: function myfunction(veri) {
+                            $('.cart-all').html('');
+                            $('.cart-all').html(veri);
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>

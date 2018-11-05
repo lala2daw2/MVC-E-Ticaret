@@ -1,0 +1,12 @@
+﻿@model eTrade.ViewModel.InfoVM
+@{
+    Layout = null;
+}
+@if (Model.Statu == true)
+{
+    <div class="alert alert-success">
+        <b>@Model.Message</b><br />
+        <a href="@Model.Url">@Model.LinkText</a>
+    </div>
+}
+

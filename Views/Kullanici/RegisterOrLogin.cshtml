@@ -1,0 +1,39 @@
+﻿@model eTrade.ViewModel.UserVM
+@{
+    ViewBag.Title = "RegisterOrLogin";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="site-title"><div class="site-inside"><span>Giriş Yap / Kayıt ol</span></div></div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="forms-separation">
+            <div class="login-form-box">
+                @using (Html.BeginForm("RegisterOrLogin", "Kullanici", FormMethod.Post, new { @class = "login-form" }))
+                {
+                    <h3>Giriş yap</h3>
+                    <p>Kullanıcı Adı</p>
+                    @Html.TextBoxFor(x => x.KullaniciAdi, new { @class = "login-line" })
+                    <p>Şifre</p>
+                    @Html.TextBoxFor(x => x.Sifre, new { @class = "login-line" ,type="password"})
+                    <input type="submit" value="Giriş yap" class="button-6">
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("RegisterOrLogin", "Kullanici", FormMethod.Post, new { @class = "register-form" }))
+        {
+            <h3>Kayıt ol</h3>
+            <p>Kullanıcı Adı</p>
+            @Html.TextBoxFor(x => x.KullaniciAdi, new { @class = "input-line" })
+            <p>E-Mail</p>
+            @Html.TextBoxFor(x => x.EMail, new { @class = "input-line" })
+            <p>Şifre</p>
+            @Html.TextBoxFor(x => x.Sifre, new { @class = "input-line", type = "password" })
+            <input type="submit" value="Kayıt ol" class="button-6">
+        }
+    </div>
+</div>
+
+

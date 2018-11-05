@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <h2>Yeni Yetki Oluştur</h2>
+
+    @using (Html.BeginForm("Create", "AdminRoles", FormMethod.Post))
+    {
+    <div class="form-group col-md-8">
+        @Html.TextBox("txtRole", null, new { @class = "form-control", placeholder = "Rol Adı" })
+
+    </div><br /><br />
+    <div class="col-md-8">
+        <button type="submit" class="btn btn-success">Kaydet</button>
+
+    </div>
+    }
+</div>
+

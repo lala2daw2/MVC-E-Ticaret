@@ -1,0 +1,56 @@
+﻿@model System.Web.Security.MembershipUserCollection
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <h2>Kullanıcı Listesi</h2>
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Kullanıcı ID</th>
+                <th>Kullanıcı Adı</th>
+                <th>E-Mail Adresi</th>
+                <th>Kayıt Tarihi</th>
+                <th>Son Giriş Tarihi</th>
+                <th>Yetki Ver</th>
+                <th>Rol Göster</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Web.Security.MembershipUser item in Model)
+            {
+                <tr>
+                    <td>@item.ProviderUserKey</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td>@string.Format("{0:dd MMMMMM yyyy}", item.CreationDate)</td>
+                    <td>@string.Format("{0:dd MMMMMM yyyy}", item.LastLoginDate)</td>
+                    <td>@Html.ActionLink("Yetki Ver", "YetkiVer", "AdminKullanicilar", new { id = item.UserName }, new { @class = "btn btn-primary" })</td>
+                    <td><a class="btn btn-success rolGöster" data-name="@item.UserName">Rol Göster</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function myfunction() {
+        $('.rolGöster').click(function myfunction() {
+            var btn = $(this);
+            var name = btn.data("name");
+            $.ajax({
+                url: "/AdminKullanicilar/RolGoster/",
+                data: { id: name },
+                type: "POST",
+                success: function myfunction(veri) {
+                    alert(veri);
+                },
+                error: function myfunction(hata) {
+                    alert(hata);
+                }
+            });
+        });
+    });
+</script>
+

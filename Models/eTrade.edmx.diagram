@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a8abab23eb894e269868eec671b4c166" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.aspnet_Roles" Width="1.5" PointX="1.5" PointY="1.625" />
+        <EntityTypeShape EntityType="Model.aspnet_Users" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="Model.Kargolar" Width="1.5" PointX="3" PointY="20.25" />
+        <EntityTypeShape EntityType="Model.Kategoriler" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="Model.Markalar" Width="1.5" PointX="3" PointY="15" />
+        <EntityTypeShape EntityType="Model.Musteri" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="Model.MusteriAdresler" Width="1.5" PointX="5.25" PointY="8.625" />
+        <EntityTypeShape EntityType="Model.OzellikDeger" Width="1.5" PointX="7.5" PointY="16.25" />
+        <EntityTypeShape EntityType="Model.Resimler" Width="1.5" PointX="0.75" PointY="9.125" />
+        <EntityTypeShape EntityType="Model.SatisDetay" Width="1.5" PointX="7.5" PointY="8.5" />
+        <EntityTypeShape EntityType="Model.Satislar" Width="1.5" PointX="5.25" PointY="4.125" />
+        <EntityTypeShape EntityType="Model.SiparisDurum" Width="1.5" PointX="3" PointY="23.375" />
+        <EntityTypeShape EntityType="Model.sysdiagram" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Urunler" Width="1.5" PointX="5.25" PointY="11.875" />
+        <EntityTypeShape EntityType="Model.UrunOzellik" Width="1.5" PointX="9.75" PointY="14.125" />
+        <EntityTypeShape EntityType="Model.UrunOzellikTip" Width="1.5" PointX="5.25" PointY="16.25" />
+        <AssociationConnector Association="Model.FK_Musteri_aspnet_Users" />
+        <AssociationConnector Association="Model.FK_Satislar_Kargolar" />
+        <AssociationConnector Association="Model.FK_Kategoriler_Resimler" />
+        <AssociationConnector Association="Model.FK_Urunler_Kategoriler" />
+        <AssociationConnector Association="Model.FK_UrunOzellikTip_Kategoriler" />
+        <AssociationConnector Association="Model.FK_Markalar_Resimler" />
+        <AssociationConnector Association="Model.FK_Urunler_Markalar" />
+        <AssociationConnector Association="Model.FK_Musteri_Resimler" />
+        <AssociationConnector Association="Model.FK_MusteriAdresler_Musteri" />
+        <AssociationConnector Association="Model.FK_Satislar_Musteri" />
+        <AssociationConnector Association="Model.FK_OzellikDeger_UrunOzellikTip" />
+        <AssociationConnector Association="Model.FK_UrunOzellik_OzellikDeger1" />
+        <AssociationConnector Association="Model.FK_Resimler_Urunler" />
+        <AssociationConnector Association="Model.FK_SatisDetay_Satislar" />
+        <AssociationConnector Association="Model.FK_SatisDetay_Urunler" />
+        <AssociationConnector Association="Model.FK_Satislar_SiparisDurum" />
+        <AssociationConnector Association="Model.FK_UrunOzellik_Urunler1" />
+        <AssociationConnector Association="Model.FK_UrunOzellik_UrunOzellikTip1" />
+        <AssociationConnector Association="Model.aspnet_UsersInRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

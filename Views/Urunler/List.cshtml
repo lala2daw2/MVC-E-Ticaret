@@ -1,0 +1,70 @@
+﻿@model IEnumerable<eTrade.Models.Urunler>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+<div class="col-lg-12">
+    <h3>Ürün Listesi</h3>
+    <div class="nav navbar navbar-right">
+        @Html.ActionLink("Yeni Ürün", "Create", "Urun", new { @class = "btn btn-default btn-lg" })
+    </div>
+    <table class="table table-bordered table-hover table-responsive" id="tblUrun">
+        <thead>
+            <tr>
+                <th><i class="fa fa-image"></i></th>
+                <th>Ürün Adı</th>
+                <th width="120">Kategori Adı</th>
+                <th width="120">Marka Adı</th>
+                <th width="120">Alış Fiyatı</th>
+                <th width="120">Satış Fiyatı</th>
+                <th width="120">Eklenme Tarihi</th>
+                <th>Detay</th>
+                <th>Güncelle</th>
+                <th>Sil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="height:6px">
+                    <td>
+                        @Html.ActionLink("+","ResimEkle","Urunler",new {id=item.ID,name=item.Adi })
+                    @*<a style="font-weight:bold" href="/Urunler/ResimEkle/@item.ID">+</a>*@
+                    </td>
+                    <td>@item.Adi</td>
+                    <td>@item.Kategoriler.KategoriAd</td>
+                    <td>@item.Markalar.MarkaAd</td>
+                    <td>@string.Format("{0:C} ", item.AlisFiyat)</td>
+                    <td>@string.Format("{0:C}", item.SatisFiyat)</td>
+                    <td>@string.Format("{0:dd MMMMMM yyyy}", item.EklemeTarihi)</td>
+                    <td>@Html.ActionLink("Ürün Detay", "Detail", "Urunler", new { id = item.ID,name=item.Adi }, new { @class = "btn btn-warning" })</td>
+                    <td>@Html.ActionLink("Güncelle", "Update", "Urunler", new { id = item.ID,name=item.Adi }, new { @class = "btn btn-primary" })</td>
+                    <td><a class="btn btn-danger btnUrun" data-id="@item.ID">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function myfunction() {
+        $('#tblUrun').on("click", ".btnUrun", function myfunction() {
+            var btn = $(this);
+            var id = btn.data("id");
+            alert(id);
+            $.ajax({
+                url: "/Urunler/Delete/" + id,
+                type: "POST",
+                success: function myfunction() {
+                    btn.parent().parent().remove();
+                },
+                error: function myfunction() {
+                    alert("Silme işlemi başarısız");
+                }
+            });
+        });
+    });
+</script>

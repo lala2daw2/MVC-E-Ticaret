@@ -1,0 +1,52 @@
+﻿@model eTrade.Models.Satislar
+@{
+    ViewBag.Title = "DurumGuncelle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/HomeLayout/css/style.css" rel="stylesheet" />
+<link href="~/HomeLayout/css/bootstrap.css" rel="stylesheet" />
+<div class="col-lg-10">
+    <h2>Müşterinin satın almış olduğu ürünler</h2>
+    <div class="well">
+        <div class="shopping-cart">
+            <div class="shopping-cart-products">
+                <center>
+                    <ul class="shopping-product-detail">
+                        <li class="shopping-1">Adı Soyadı</li>
+                        <li class="shopping-2">Toplam Tutar</li>
+                        <li class="shopping-3">Tarih</li>
+
+                    </ul>
+
+                    <ul class="shopping-product-detail">
+                        <li class="shopping-1">
+                            @Model.Musteri.Ad @Model.Musteri.Soyad
+                        </li>
+                        <li class="shopping-2">
+                            @string.Format("{0:C}", Model.ToplamTutar)
+                        </li>
+                        <li class="shopping-3">
+
+                            @string.Format("{0:dd MMMMMM yyyy}", @Model.SatisTarihi)
+
+                        </li>
+
+                    </ul>
+
+                </center>
+
+
+            </div>
+            @using (Html.BeginForm("DurumGuncelle", "Satislar", FormMethod.Post))
+            {
+                @Html.DropDownList("SiparisDurumID", ViewBag.Durum as SelectList, new { @class = "form-control ,col-md-4" })<br />
+                <button type="submit" class="btn btn-success">Kaydet</button>
+
+            }
+        </div>
+    </div>
+</div>
+
+

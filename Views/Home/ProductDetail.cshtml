@@ -1,0 +1,72 @@
+﻿@model eTrade.ViewModel.UrunVM
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="content">
+    <div class="product-one">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="the-slider product-big-image" data-tesla-plugin="slider" data-tesla-item=".slide" data-tesla-next=".product-image-arrows-right" data-tesla-prev=".product-image-arrows-left" data-tesla-container=".slide-wrapper">
+                        <ul class="product-image-arrows">
+                            <li class="product-image-arrows-left"><i class="icon-517" title="left"></i></li>
+                            <li class="product-image-arrows-right"><i class="icon-501" title="right"></i></li>
+                        </ul>
+                        <ul class="slide-wrapper">
+                            @foreach (var item in Model.Resim.ToList())
+                            {
+                                <li class="slide">
+                                    <img style="width:500px; height:550px;" src=" @item.OrtaYol" alt="@Model.Urunler.Adi." />
+                                </li>
+                            }
+                        </ul>
+                        <div class="row">
+                            <ul class="the-bullets-dots" data-tesla-plugin="bullets">
+                                @foreach (var item in Model.Resim.ToList())
+                                {
+                                    <li><div class="col-sm-2 col-xs-1"><img src="@item.OrtaYol" alt="product image" height="20" /></div></li>
+
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2>@Model.Urunler.Adi</h2>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="product-price">Fiyat : <span></span>@string.Format("{0:C}", Model.Urunler.SatisFiyat)</div>
+                            <a href="#" class="button-2">Sepete ekle</a>
+
+                        </div>
+                    </div>
+                    <br /><br /><br /><br /><br /><br />
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#description" data-toggle="tab">Açıklama</a></li>
+                        <li class=""><a href="#reviews" data-toggle="tab">Özellikler</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="description">
+                            <p>@Model.Urunler.Aciklama</p>
+                        </div>
+                        <div class="tab-pane" id="reviews">
+                        <ul class="product-details">
+
+                                @foreach (var item in Model.Ozellik.ToList())
+                                {
+                                    <li>
+                                        <b>@item.UrunOzellikTip.Adi</b> : <i>@item.OzellikDeger.Adi</i>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

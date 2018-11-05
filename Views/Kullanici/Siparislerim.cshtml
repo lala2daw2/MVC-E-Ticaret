@@ -1,0 +1,70 @@
+﻿@model IEnumerable<eTrade.Models.Satislar>
+@{
+    ViewBag.Title = "Siparislerim";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<div class="col-md-2" style="height:500px;">
+    <center>
+        <ul class="glyphicon-list">
+            <li><img src="@ViewBag.Foto" /></li>
+            <li style="font-size:17px">
+                @Html.ActionLink(User.Identity.Name + " Profili", "Profil", "Kullanici", new { id = User.Identity.Name }, new { @class = "btn-sm btn-success" })
+                <br /><br />
+
+            </li>
+
+            <li style="font-size:15px">
+                @Html.ActionLink("Profil Bilgilerini Güncelle", "Edit", "Kullanici", new { id = User.Identity.Name }, new { @class = "btn-sm btn-primary" })
+                <br /><br />
+            </li>
+            <li style="font-size:15px"><a href="/Siparislerim/@User.Identity.Name" class="button-2" style="color:white">Siparişlerim</a></li>
+            <li style="font-size:15px"><a href="/GecmisSiparis/@User.Identity.Name" class="button-3">Geçmiş Siparişlerim</a></li>
+        </ul>
+    </center>
+</div>
+<div class="col-sm-1"></div>
+
+<div class="col-lg-10">
+    <h2>Beklediğiniz Ürünler</h2>
+    <div class="well">
+        <div class="shopping-cart">
+            <div class="shopping-cart-products">
+                <ul class="shopping-product-detail">
+                    <li class="shopping-1">Ad Soyad</li>
+                    <li class="shopping-2">Kargo Şirketi</li>
+                    <li class="shopping-3">Satış Tarihi</li>
+                    <li class="shopping-4">Sipariş Durumu</li>
+                    <li class="shopping-5">Tutar</li>
+                </ul>
+                @foreach (var item in Model)
+                {
+                    <ul class="shopping-product-detail">
+                        <li class="shopping-1">
+                            @item.Musteri.Ad @item.Musteri.Soyad
+                        </li>
+                        <li class="shopping-2">
+                            @item.Kargolar.SirketAdi
+                        </li>
+                        <li class="shopping-3">
+                            @string.Format("{0:dd MMMMMM yyyy - H:mm}", item.SatisTarihi)
+                        </li>
+                        <li class="shopping-4">
+                            @item.SiparisDurum.Ad
+                        </li>
+                        <li class="shopping-5">
+                            @string.Format("{0:C}", item.ToplamTutar)
+                        </li>
+                        <li class="shopping-6">
+                            @Ajax.ActionLink("Detayları görüntüle", "SiparisDetays", "Kullanici", new { id = item.ID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "sDetay" })
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+        <div id="sDetay">
+
+        </div>
+    </div>
+</div>
+
+

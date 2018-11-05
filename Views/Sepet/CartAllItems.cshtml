@@ -1,0 +1,80 @@
+﻿@model eTrade.App_Start.Sepet
+@{
+    ViewBag.Title = "CartAllItems";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<h2>Alışveriş Sepeti</h2>
+
+@{
+    if (Model != null)
+    {
+        <div class="shopping-cart">
+            <div class="shopping-cart-products">
+                <ul class="shopping-product-detail">
+                    <li class="shopping-1">Ürün Adı</li>
+                    <li class="shopping-2">Açıklama</li>
+                    <li class="shopping-3">Adet</li>
+                    <li class="shopping-4">Adet Fiyat</li>
+                    <li class="shopping-5">Toplam Fiyat</li>
+                </ul>
+                @foreach (var item in Model.Urunler)
+                {
+                    <ul class="shopping-product-detail">
+
+                        <li class="shopping-1">
+                            <a href="/Home/ProductDetail/@item.Urun.ID">@item.Urun.Adi</a>
+                        </li>
+                        <li class="shopping-2">
+                            @(item.Urun.Aciklama.Length > 50 ? Html.Raw(item.Urun.Aciklama.Substring(0, 50)) : Html.Raw(item.Urun.Aciklama))
+                        </li>
+                        <li class="shopping-3">
+                            <input name="quantity" disabled="disabled" value="@item.Adet" title="Qty" class="input-text qty text">
+                        </li>
+                        <li class="shopping-4">
+                            @string.Format("{0:C}", item.Urun.SatisFiyat)
+                        </li>
+                        <li class="shopping-5">
+                            @item.Tutar.ToString("C2")
+                        </li>
+                    </ul>
+
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="shopping-cart">
+            <div class="shopping-cart-products">
+                <ul class="shopping-product-detail">
+                    <li class="shopping-1">Product name</li>
+                    <li class="shopping-2">Description</li>
+                    <li class="shopping-3">Quantity</li>
+                    <li class="shopping-4">Unit price</li>
+                    <li class="shopping-5">Total</li>
+                </ul>
+            </div>
+        </div>
+        
+    }
+    <div class="row">
+        <div class="col-md-3">
+            <a href="/Urun/TumUrunler" class="button-7">Alışverişe Devam et.</a>
+        </div>
+
+        <div class="col-md-4 navbar-right">
+            <div class="checkout-total">
+                @if (Model != null)
+                {
+                    <p>Toplam tutar : @string.Format("{0:C}", Model.ToplamTutar)</p>
+                }
+                @Html.ActionLink("Alışverişi Tamamla", "CompleteShop", "Sepet", new { @class = "button-6" })
+                @*<button class="button-6">Alışverişi Tamamla</button>*@
+            </div>
+        </div>
+    </div>
+}
+
+
+

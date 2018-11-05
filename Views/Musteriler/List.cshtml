@@ -1,0 +1,38 @@
+﻿@model IEnumerable<eTrade.Models.Musteri>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12">
+    <h2>Müşteri Listesi</h2>
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th style="width:40px"><i class="fa fa-photo"></i></th>
+                <th>Adı Soyadı</th>
+                <th>Kullanıcı adı</th>
+                <th>E-Mail Adresi</th>
+                <th>Telefon Numarası</th>
+                <th>Bize kazandırdığı Para</th>
+                <th>Satış Detayları</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width:45px"><img width="40" src="@item.Resimler.KucukYol" /></td>
+                    <td>@item.Ad @item.Soyad</td>
+                    <td>@item.KullaniciAdi</td>
+                    <td>@item.EMail</td>
+                    <td>@item.Telefon</td>
+                    <td>@string.Format("{0:C}", item.Satislars.Sum(x => x.ToplamTutar))</td>
+                    <td>@Html.ActionLink("Satış Detayları", "OrderDetailByUsername", "Musteriler", new { id = item.ID }, new { @class = "btn btn-primary" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <label>Toplam Tutar : @string.Format("{0:C}", ViewBag.ToplamTutar)</label>
+</div>
+

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<eTrade.Models.Urunler>
+@{
+    ViewBag.Title = "KategoriUrunList";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<div class="row">
+    <div class="tesla-carousel-items">
+        @foreach (var item in Model.ToList())
+        {
+            <div class="col-md-3 col-xs-6">
+                <div class="product">
+                    <div class="product-cover">
+                        <div class="product-cover-hover"><span>
+    <a href="/UrunDetay/@item.Adi/@item.ID">Görüntüle</a>
+</span></div>
+                        <img style="width:300px; height:360px;" src=" @(item.Resimlers!=null?item.Resimlers.FirstOrDefault(x=>x.Varsayilan==true).OrtaYol:"~/HomeLayout/images/photos/image-8.jpg")" alt="@item.Adi." />
+                    </div>
+                    <div class="product-details">
+                        <h1>
+                            <a href="/UrunDetay/@item.Adi/@item.ID">@item.Adi</a>
+                        </h1>
+                        <p>@(item.Aciklama.Length > 50 ? Html.Raw(item.Aciklama.Substring(0, 50)) : Html.Raw(item.Aciklama))</p>
+                        <div class="product-price">
+                            <a class="addCart" data-id="@item.ID"><i class="icon-257" title="Sepete Ekle"></i></a>
+                            @string.Format("{0:C}", item.SatisFiyat)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model eTrade.Models.Urunler
+@{
+    ViewBag.Title = "OzellikVer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-4">
+    <div id="infoVM">
+
+    </div>
+    <h3>@Model.Kategoriler.KategoriAd @Model.Adi </h3>
+    @using (Ajax.BeginForm("OzellikVer", "UrunOzellikTip", new AjaxOptions {HttpMethod="POST", UpdateTargetId= "infoVM" }))
+    {
+        <div class="form-group">
+            @Html.DropDownList("OzellikTipID", ViewBag.Tip as SelectList, new { @class = "form-control " })
+        </div>
+        <div class="form-group deger">
+
+        </div>
+        <button type="submit" class="btn btn-success">Kaydet</button>
+      
+            @ViewBag.Hata
+        
+    }
+
+</div>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#OzellikTipID').change(function () {
+            var id = $(this).val();
+            $.ajax({
+                url: "/UrunOzellikTip/OzellikDegerWidget/" + id,
+                type: "POST",
+                success: function myfunction(data) {
+                    $('.deger').html('');
+                    $('.deger').html(data);
+                }
+            });
+        });
+    });
+</script>

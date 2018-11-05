@@ -1,0 +1,47 @@
+﻿@model eTrade.ViewModel.UrunVM
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <div>
+        <br />
+        <center>
+            <h3 style="color:red">@Model.Urunler.Adi</h3>
+        </center>
+
+        <div class="nav navbar navbar-left" style="font-size:16px;font-weight:bold">
+            Kategori :  @Model.Urunler.Kategoriler.KategoriAd
+            <br />
+            Marka : @Model.Urunler.Markalar.MarkaAd<br />
+            Alış Fiyatı  : @string.Format("{0:C}", Model.Urunler.AlisFiyat)<br />
+            Satış Fiyatı : @string.Format("{0:C}", Model.Urunler.SatisFiyat)<br />
+            Kar Fiyatı   : @string.Format("{0:C}", Model.Urunler.AlisFiyat - Model.Urunler.SatisFiyat)
+        </div>
+        <br /><br /><br /><br /><br /><br /><br />
+        <center>
+            @if (Model.Resim != null)
+            {
+                foreach (var item in Model.Resim)
+                {
+                    <img style="margin-left:10px" width="250" height="200" class="img-rounded" src="@item.OrtaYol" alt="@Model.Urunler.Adi" />
+                }
+            }
+
+            <br />
+            <b style="font-size:20px">Açıklama</b><br /><br />
+            @Html.Raw(Model.Urunler.Aciklama)
+            <br /><br />
+            <ul style="list-style:none;" class="list-group">
+                @foreach (var item in Model.Ozellik)
+                {
+                    <li class="list-group-item">
+                        <b>@item.UrunOzellikTip.Adi &nbsp; : </b>  &nbsp; @item.OzellikDeger.Adi
+                    </li>
+                }
+            </ul>
+        </center>
+        <hr />
+    </div>
+</div>
+

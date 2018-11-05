@@ -1,0 +1,28 @@
+﻿@model IEnumerable<eTrade.Models.OzellikDeger>
+@{
+    ViewBag.Title = "DegerListele";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <h3>Özellik Değer Listesi</h3>
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Kategori Adı</th>
+                <th>Tip Adı</th>
+                <th>Değeri</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.UrunOzellikTip.Kategoriler.KategoriAd</td>
+                <td>@item.UrunOzellikTip.Adi</td>
+                <td>@item.Adi</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

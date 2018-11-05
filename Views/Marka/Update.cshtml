@@ -1,0 +1,25 @@
+﻿@model eTrade.Models.Markalar
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-lg-12">
+    <center>
+        <h3>@Model.MarkaAd isimli markanın eski resimi.</h3>
+        <img src="@Model.Resimler.KucukYol" />
+    </center>
+    @using (Html.BeginForm("Update", "Marka", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            @Html.TextBoxFor(x => x.MarkaAd, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.TextAreaFor(x => x.Aciklama, 7, 3, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.TextBox("txtFoto", null, new { @class = "form-control", type = "file" })
+        </div>
+        <button type="submit" class="btn btn-success">Kaydet</button>
+    }
+</div>
+
